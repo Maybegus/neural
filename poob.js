@@ -13,18 +13,22 @@ function network(neurons, nodes) {
   this.nodes = nodes
 };
 
-function generate(amount, inputs, outputs, maxlayer, maxheight, minlayer, minheight) {
+function generate(amount, inputs, outputs, maxlayer, maxheight) {
   let cluster = [];
-  let stagingneurons = [];
-  for (i = 0; i < amount; i++) {
-    for (i = 0; i < maxlayer; i++) {
-      for (i = 0; i < maxheight; i++) {
-        Math.random()
+  for (a = 0; a < amount; a++) {
+    let stagingneurons = [];
+    let stagingnodes = [];
+    let progress = 0;
+    let currentlayer = 0;
+    for (b = 0; b < maxlayer; b++) {
+      for (c = 0; c < maxheight; c++) {
+        stagingnodes[progress] = new node(progress, "none", currentlayer)
+        progress++
       }
+      currentlayer++
     }
-    //cluster[i] = new network([new neuron([1, 3], Math.random() * 2, 1), new neuron([1, 2], Math.random() * 2, 1)], new node(1, "yeet", 1))
-    cluster[i] = new network()
+    cluster[a] = new network(stagingneurons, stagingnodes)
   }
-  console.log(cluster);
+  console.log(cluster[0].nodes);
 }
-generate(5, 3, 4, 8, 10);
+generate(5, 3, 4, 2, 2);
