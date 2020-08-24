@@ -1,3 +1,4 @@
+//const fs = require(fs);
 function neuron(connections, multiplier, layer) {
   this.connections = connections;
   this.multiplier = multiplier;
@@ -49,62 +50,31 @@ function generate(amount, inputs, outputs, maxlayer, maxheight, neurondensity) {
     let secondprogress = 0;
     let neuronprogress = 0;
     let temp;
-    for (b = 0; b < maxlayer + 2; b++) {
-      for (c = 0; c < stagingnodes.length; c++) {
-          temp = stagingnodes.findIndex(element => element.layer == b && element.neurons == false)
-          if (temp != -1) {
-            first[firstprogress] = stagingnodes[temp].id;
-            stagingnodes[temp].neurons = "loaded"
-          }
-          temp = stagingnodes.findIndex(element => element.layer == b + 1 && element.neurons == false)
-          if (temp != -1) {
-            second[secondprogress] = stagingnodes[temp].id;
-            stagingnodes[temp].neurons = "loaded"
-          }
-          console.log(b)
-          console.log(first)
-          console.log(second)
-
-          firstprogress++
-          secondprogress++
-      }
+    for (b = 0; b < maxlayer + 1; b++) {
+      first = stagingnodes.filter(element => element.layer == b);
+      second = stagingnodes.filter(element => element.layer == b + 1);
 
       while (first.length > second.length) {
-        
-
         second[second.length] = second[Math.floor(Math.random() * second.length)];
       }
       while (first.length < second.length) {
         first[first.length] = first[Math.floor(Math.random() * first.length)];
       }
-      console.log(first)
-      console.log(second)
       if (first.length == second.length) {
         while (first.length > 0) {
-          //console.log("ran");
-          //console.log(first);
-          //console.log(second);
-
-          stagingneurons[neuronprogress] = new neuron([first[Math.floor(Math.random() * first.length)], second[Math.floor(Math.random() * second.length)]], Math.random() * (1.9 - 0.1) + 0.1, b);
-          temp = first.findIndex(element => element == stagingneurons[neuronprogress].connections[0]);
+          stagingneurons[neuronprogress] = new neuron([first[Math.floor(Math.random() * first.length)].id, second[Math.floor(Math.random() * second.length)].id], Math.random() * (1.9 - 0.1) + 0.1, b);
+          temp = first.findIndex(element => element.id == stagingneurons[neuronprogress].connections[0]);
           first.splice(temp, 1);
-          temp = second.findIndex(element => element == stagingneurons[neuronprogress].connections[1]);
+          temp = second.findIndex(element => element.id == stagingneurons[neuronprogress].connections[1]);
           second.splice(temp, 1)
           neuronprogress++
-          console.log(first);
-          console.log(second);
-          //console.log("LINEBREAK")
-        }
-      first = [];
-      second = [];
       }
+    first = [];
+    second = [];
     }
-    console.log(stagingneurons)
-    console.log(stagingnodes)
-
-    //console.log(unsetnodeindex);
-    //console.log(stagingnodes);
     cluster[a] = new network(stagingneurons, stagingnodes);
+    }
   }
+  console.log(cluster)
 }
-generate(1, 5, 5, 5, 5, 7);
+generate(1, 1, 1, 2, 2, 7);
