@@ -1,1 +1,2 @@
-console.log(Math.floor(Math.random() * (1 - 2 + 1) ) + 2);
+const test = [5, 10, 15]
+console.log(test.length)
