@@ -1,4 +1,3 @@
-//const fs = require(fs);
 function neuron(connections, multiplier, layer) {
   this.connections = connections;
   this.multiplier = multiplier;
@@ -10,14 +9,13 @@ function node(identification, functions, layer, input, output, neurons) {
   this.layer = layer;
   this.input = input;
   this.output = output;
-  this.neurons = neurons;
 };
 function network(neurons, nodes) {
   this.neurons = neurons,
   this.nodes = nodes
 };
 
-function generate(amount, inputs, outputs, maxlayer, maxheight, neurondensity) {
+exports.generate = function (amount, inputs, outputs, maxlayer, maxheight) {
   let cluster = [];
   let nodeindex = [];
   let neuronindex = [];
@@ -75,6 +73,5 @@ function generate(amount, inputs, outputs, maxlayer, maxheight, neurondensity) {
     cluster[a] = new network(stagingneurons, stagingnodes);
     }
   }
-  console.log(cluster)
+  return(cluster);
 }
-generate(1, 1, 1, 2, 2, 7);
