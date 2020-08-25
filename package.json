@@ -1,5 +1,5 @@
 {
-  "name": "neural",
+  "name": "@maybegus/neural",
   "version": "1.0.0",
   "description": "neural network framework",
   "main": "neural.js",
